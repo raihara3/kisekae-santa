@@ -13,9 +13,9 @@ let isComplete = false
 
 AFRAME.registerComponent('run', {
   init: () => {
-    this.santa = document.getElementById('m_santa')
-    this.boushi = document.getElementById('m_boushi')
-    this.huku = document.getElementById('m_huku')
+    // this.santa = document.getElementById('m_santa')
+    // this.boushi = document.getElementById('m_boushi')
+    // this.huku = document.getElementById('m_huku')
 
     // this.p_santa = new THREE.Vector3()
     // this.p_boushi = new THREE.Vector3()
