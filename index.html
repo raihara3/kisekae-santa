@@ -14,6 +14,7 @@
       <a-asset-item id="santa_body" src="./model/santa_body.glb"></a-asset-item>
       <a-asset-item id="santa_boushi" src="./model/santa_boushi.glb"></a-asset-item>
       <a-asset-item id="santa_huku" src="./model/santa_huku.glb"></a-asset-item>
+      <a-asset-item id="tonakai" src="./model/tonakai.glb"></a-asset-item>
       <img id="santa_message" src="./message.png">
     </a-assets>
 
@@ -43,6 +44,13 @@
     </a-marker>
 
     <a-marker preset="custom" type="pattern" url='./marker/huku.patt' id="m_huku" markerevent>
+    </a-marker>
+
+    <a-marker preset="custom" type="pattern" url='./marker/tonakai.patt'>
+      <a-entity
+        gltf-model="#tonakai"
+        scale="0.5 0.5 0.5"
+      ></a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
