@@ -40,16 +40,16 @@ AFRAME.registerComponent('run', {
 
       // const distance = this.p_santa.distanceTo(this.p_boushi)
       // this.boushi.setAttribute('position', `${this.p_santa.x} ${this.p_santa.y} ${this.p_santa.z}`)
-      document.getElementById('boushi').setAttribute('gltf-model', '#santa_boushi')
+      document.getElementById('boushi').setAttribute('gltf-model', '#a-santa_boushi')
       isVisibled.m_boushi = true
       return
     }
     if(isMarkerFounded.m_huku && !isVisibled.m_huku) {
-      document.getElementById('huku').setAttribute('gltf-model', '#santa_huku')
+      document.getElementById('huku').setAttribute('gltf-model', '#a-santa_huku')
       isVisibled.m_huku = true
       return
     }
-    if(isMarkerFounded.m_boushi && isMarkerFounded.m_huku && !isComplete) {
+    if(isVisibled.m_boushi && isVisibled.m_huku && !isComplete) {
       document.getElementById('message').setAttribute('opacity', '1')
       isComplete = true
     }
