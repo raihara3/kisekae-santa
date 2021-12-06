@@ -2,6 +2,7 @@ const isMarkerFounded = {
   m_santa: false,
   m_boushi: false,
   m_huku: false,
+  m_tonakai: false,
 }
 
 const isVisibled = {
@@ -13,13 +14,19 @@ let isComplete = false
 
 AFRAME.registerComponent('run', {
   init: () => {
-    // this.santa = document.getElementById('m_santa')
-    // this.boushi = document.getElementById('m_boushi')
-    // this.huku = document.getElementById('m_huku')
+    this.santa = document.getElementById('m_santa')
+    this.tonakai = document.getElementById('m_tonakai')
 
-    // this.p_santa = new THREE.Vector3()
-    // this.p_boushi = new THREE.Vector3()
-    // this.p_huku = new THREE.Vector3()
+    this.p_santa = new THREE.Vector3()
+    this.p_tonakai = new THREE.Vector3()
+
+    const geometry = new THREE.CylinderGeometry(0.03, 0.03, 1, 10)
+    geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0.5, 0))
+    geometry.applyMatrix(new THREE.Matrix4().makeRotationX(THREE.Math.degToRad( 90 )))
+    const material = new THREE.MeshLambertMaterial({color: 0xFF0000})
+    this.cylinder = new THREE.Mesh(geometry, material)
+    this.cylinderGroup = document.getElementById('leash').object3D
+    this.cylinderGroup.add(this.cylinder)
 
     document.querySelectorAll('a-marker').forEach(marker => {
       marker.addEventListener('markerFound', () => {
@@ -35,11 +42,6 @@ AFRAME.registerComponent('run', {
     if(!isMarkerFounded.m_santa) return
 
     if(isMarkerFounded.m_boushi && !isVisibled.m_boushi) {
-      // this.santa.object3D.getWorldPosition(this.p_santa)
-      // this.boushi.object3D.getWorldPosition(this.p_boushi)
-
-      // const distance = this.p_santa.distanceTo(this.p_boushi)
-      // this.boushi.setAttribute('position', `${this.p_santa.x} ${this.p_santa.y} ${this.p_santa.z}`)
       document.getElementById('boushi').setAttribute('gltf-model', '#a-santa_boushi')
       isVisibled.m_boushi = true
       return
@@ -49,9 +51,20 @@ AFRAME.registerComponent('run', {
       isVisibled.m_huku = true
       return
     }
+    if(isMarkerFounded.m_tonakai) {
+      this.tonakai.object3D.getWorldPosition(this.p_tonakai)
+      this.santa.object3D.getWorldPosition(this.p_santa)
+      p_santa.z = p_santa.z + 0.6
+      p_santa.x = p_santa.x + 0.1
+
+      const distance = this.p_tonakai.distanceTo(this.p_santa)
+      this.cylinderGroup.lookAt(this.p_santa)
+      this.cylinder.scale.set(1, 1, distance)
+    }
     if(isVisibled.m_boushi && isVisibled.m_huku && !isComplete) {
       document.getElementById('message').setAttribute('opacity', '1')
       isComplete = true
+      return
     }
   }
 })
