@@ -5,7 +5,7 @@ const isMarkerFounded = {
   m_tonakai: false,
 }
 
-const isVisibled = {
+const isDressed = {
   m_boushi: false,
   m_huku: false,
 }
@@ -41,14 +41,14 @@ AFRAME.registerComponent('run', {
   tick: () => {
     if(!isMarkerFounded.m_santa) return
 
-    if(isMarkerFounded.m_boushi && !isVisibled.m_boushi) {
+    if(isMarkerFounded.m_boushi && !isDressed.m_boushi) {
       document.getElementById('boushi').setAttribute('gltf-model', '#a-santa_boushi')
-      isVisibled.m_boushi = true
+      isDressed.m_boushi = true
       return
     }
-    if(isMarkerFounded.m_huku && !isVisibled.m_huku) {
+    if(isMarkerFounded.m_huku && !isDressed.m_huku) {
       document.getElementById('huku').setAttribute('gltf-model', '#a-santa_huku')
-      isVisibled.m_huku = true
+      isDressed.m_huku = true
       return
     }
     if(isMarkerFounded.m_tonakai) {
@@ -61,7 +61,7 @@ AFRAME.registerComponent('run', {
       this.cylinderGroup.lookAt(this.p_santa)
       this.cylinder.scale.set(1, 1, distance)
     }
-    if(isVisibled.m_boushi && isVisibled.m_huku && !isComplete) {
+    if(isDressed.m_boushi && isDressed.m_huku && !isComplete) {
       document.getElementById('message').setAttribute('opacity', '1')
       isComplete = true
       return
